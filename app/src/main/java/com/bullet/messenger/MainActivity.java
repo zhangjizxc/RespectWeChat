@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RespectWXManager.getInstance().start();
 
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 ComponentName componentName = new ComponentName("com.tencent.mm", "com.tencent.mm.ui.tools.ShareImgUI");
