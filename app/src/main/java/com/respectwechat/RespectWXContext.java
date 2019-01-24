@@ -20,19 +20,21 @@ import android.content.ContextWrapper;
 
 class RespectWXContext extends ContextWrapper {
 
+    private static final String TAG ="RespectWXContext";
+
     public RespectWXContext(Context base) {
         super(base);
     }
 
     @Override
     public String getPackageName() {
-        android.util.Log.v("fuckwx","RespectWXContext getPackageName");
-        return "com.fuckwx";
+        android.util.Log.v(TAG,"RespectWXContext getPackageName");
+        return "com.android.gallery3d";
     }
 
     public String getBasePackageName() {
-        android.util.Log.v("fuckwx"," RespectWXContext getBasePackageName");
-        return "com.fuckwx";
+        android.util.Log.v(TAG, "RespectWXContext getBasePackageName");
+        return "com.android.gallery3d";
     }
 
 
