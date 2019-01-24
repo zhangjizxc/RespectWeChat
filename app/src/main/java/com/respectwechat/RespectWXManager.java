@@ -41,6 +41,9 @@ public class RespectWXManager {
     private RespectWXManager() {
     }
 
+    /**
+     * 开始hook
+     */
     public void start() {
         if (mOriginInstrumentation == null) {
             try {

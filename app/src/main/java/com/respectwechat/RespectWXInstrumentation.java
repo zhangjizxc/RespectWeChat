@@ -40,29 +40,35 @@ public class RespectWXInstrumentation extends Instrumentation {
 
     public ActivityResult execStartActivity(Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode) {
         Log.v(TAG," start activity..."+target);
-        who = hookContext(who);
+        who = hookContext(who, intent);
         return mBase.execStartActivity(who, contextThread, token, target, intent, requestCode);
     }
 
     public ActivityResult execStartActivity(Context who, IBinder contextThread, IBinder token, Activity target, Intent intent, int requestCode, Bundle options) {
         Log.v(TAG," start activity..."+target);
-        who = hookContext(who);
+        who = hookContext(who,intent);
         return mBase.execStartActivity(who, contextThread, token, target, intent, requestCode, options);
     }
 
     public ActivityResult execStartActivity(Context who, IBinder contextThread, IBinder token, Fragment target, Intent intent, int requestCode, Bundle options) {
         Log.v(TAG," start activity..."+target);
-        who = hookContext(who);
+        who = hookContext(who,intent);
         return mBase.execStartActivity(who, contextThread, token, target, intent, requestCode, options);
     }
 
     public ActivityResult execStartActivity(Context who, IBinder contextThread, IBinder token, String target, Intent intent, int requestCode, Bundle options) {
         Log.v(TAG," start activity..."+target);
-        who = hookContext(who);
+        who = hookContext(who,intent);
         return mBase.execStartActivity(who, contextThread, token, target, intent, requestCode, options);
     }
 
-    protected Context hookContext(Context who) {
-        return new RespectWXContext(who);
+    protected Context hookContext(Context who,Intent intent) {
+        if (intent != null
+                && intent.getAction().equals(Intent.ACTION_SEND)
+                && intent.getComponent() != null
+                && "com.tencent.mm".equals(intent.getComponent().getPackageName())) {
+            return new RespectWXContext(who);
+        }
+        return who;
     }
 }
